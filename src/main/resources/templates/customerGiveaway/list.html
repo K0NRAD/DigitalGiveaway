@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="#{customerGiveaway.list.headline}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex flex-wrap mb-4">
+        <h1 th:text="#{customerGiveaway.list.headline}" class="flex-grow-1"/>
+        <div>
+            <a th:href="@{/customerGiveaway/add}" th:text="#{customerGiveaway.list.createNew}"
+               class="btn btn-primary ms-2"/>
+        </div>
+    </div>
+    <div th:if="${customerGiveaways.empty}" th:text="#{customerGiveaway.list.empty}"/>
+    <div th:if="${!customerGiveaways.empty}" class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead>
+            <th scope="col">
+                <a th:href="@{/customerGiveaway(field='date', sortOrder=${sortOrder})}"
+                   th:text="#{customerGiveaway.date.label}"></a>
+            </th>
+            <th th:text="#{customerGiveaway.quantity.label}" scope="col"/>
+            <th scope="col">
+                <a th:href="@{/customerGiveaway(field='customerEmail', sortOrder=${sortOrder})}"
+                   th:text="#{customerGiveaway.customer.label}"></a>
+            </th>
+            <th scope="col">
+                <a th:href="@{/customerGiveaway(field='giveawayName', sortOrder=${sortOrder})}"
+                   th:text="#{customerGiveaway.giveaway.label}"></a>
+            </th>
+            </thead>
+            <tbody>
+            <tr th:each="customerGiveaway : ${customerGiveaways}">
+                <td th:text="${customerGiveaway.date}"/>
+                <td th:text="${customerGiveaway.quantity}"/>
+                <td th:text="${customerGiveaway.getCustomerEmail()}"/>
+                <td th:text="${customerGiveaway.getGiveawayName()}"/>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a th:href="@{/customerGiveaway/edit/{id}(id=${customerGiveaway.id})}"
+                           th:text="#{customerGiveaway.list.edit}" class="btn btn-sm btn-info"/>
+                        <form th:action="@{/customerGiveaway/delete/{id}(id=${customerGiveaway.id})}"
+                              th:data-confirm-message="#{delete.confirm}" method="post"
+                              class="js-submit-confirm d-inline">
+                            <button th:text="#{customerGiveaway.list.delete}" type="submit"
+                                    class="btn btn-sm btn-danger"/>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{giveaway.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{giveaway.list.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/giveaways/add}" th:text="#{giveaway.list.createNew}" class="btn btn-primary ms-2" />
+                </div>
+            </div>
+            <div th:if="${giveaways.empty}" th:text="#{giveaway.list.empty}" />
+            <div th:if="${!giveaways.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th th:text="#{giveaway.name.label}" scope="col" />
+                            <th th:text="#{giveaway.description.label}" scope="col" />
+                            <th th:text="#{giveaway.note.label}" scope="col" />
+                            <th th:text="#{giveaway.type.label}" scope="col" />
+                            <th th:text="#{giveaway.size.label}" scope="col" />
+                            <th th:text="#{giveaway.quantity.label}" scope="col" />
+                            <th th:text="#{giveaway.vendor.label}" scope="col" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="giveaway : ${giveaways}">
+                            <td th:text="${giveaway.name}" />
+                            <td th:text="${giveaway.description}" />
+                            <td th:text="${giveaway.note}" />
+                            <td th:text="${giveaway.type}" />
+                            <td th:text="${giveaway.size}" />
+                            <td th:text="${giveaway.quantity}" />
+                            <td th:text="${giveaway.vendor}" />
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/giveaways/edit/{id}(id=${giveaway.id})}" th:text="#{giveaway.list.edit}" class="btn btn-sm btn-info" />
+                                    <form th:action="@{/giveaways/delete/{id}(id=${giveaway.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button th:text="#{giveaway.list.delete}" type="submit" class="btn btn-sm btn-danger" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

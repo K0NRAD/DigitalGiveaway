@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{home.index.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="row row-cols-auto gx-5 gy-4">
+                <div class="col">
+                    <a th:href="@{/customerGiveaway}"
+                       class="d-flex flex-column align-items-center text-center text-white text-decoration-none">
+                        <img th:src="@{/images/customerGiveaways.png}" th:alt="#{customerGiveaway.list.headline}"
+                             width="200" height="200">
+                        <span th:text="#{customerGiveaway.list.headline}"></span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a th:href="@{/customers}"
+                       class="d-flex flex-column align-items-center text-center text-white text-decoration-none">
+                        <img th:src="@{/images/customers.png}" th:alt="#{customer.list.headline}" width="200" height="200">
+                        <span th:text="#{customer.list.headline}"></span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a th:href="@{/giveaways}"
+                       class="d-flex flex-column align-items-center text-center text-white text-decoration-none">
+                        <img th:src="@{/images/giveaways.png}" th:alt="#{giveaway.list.headline}" width="200"
+                             height="200">
+                        <span th:text="#{giveaway.list.headline}"></span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a th:href="@{/vendors}"
+                       class="d-flex flex-column align-items-center text-center text-white text-decoration-none">
+                        <img th:src="@{/images/vendors.png}" th:alt="#{vendor.list.headline}" width="200" height="200">
+                        <span th:text="#{vendor.list.headline}"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

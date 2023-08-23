@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{giveaway.add.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{giveaway.add.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/giveaways}" th:text="#{giveaway.add.back}" class="btn btn-secondary" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('giveaway')}" />
+            <form th:action="${T(schwarz.it.digital_giveaway.util.WebUtils).getRequest().requestURI}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='name')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='description')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='note')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='type', columns='col-md-4')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='size', columns='col-md-4')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='quantity', type='number', columns='col-md-2')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='vendor', type='select', columns='col-md-6')}" />
+                <input type="submit" th:value="#{giveaway.add.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>
