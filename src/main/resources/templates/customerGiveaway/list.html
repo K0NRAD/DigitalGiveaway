@@ -33,7 +33,7 @@
             </thead>
             <tbody>
             <tr th:each="customerGiveaway : ${customerGiveaways}">
-                <td th:text="${customerGiveaway.date}"/>
+                <td th:text="${#temporals.format(customerGiveaway.date, 'dd.MM.yyyy')}"/>
                 <td th:text="${customerGiveaway.quantity}"/>
                 <td th:text="${customerGiveaway.getCustomerEmail()}"/>
                 <td th:text="${customerGiveaway.getGiveawayName()}"/>

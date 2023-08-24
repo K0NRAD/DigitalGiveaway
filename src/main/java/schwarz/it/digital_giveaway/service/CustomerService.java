@@ -10,6 +10,7 @@ import schwarz.it.digital_giveaway.repos.CustomerRepository;
 import schwarz.it.digital_giveaway.util.NotFoundException;
 import schwarz.it.digital_giveaway.util.WebUtils;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -59,8 +60,12 @@ public class CustomerService {
         customerDTO.setId(customer.getId());
         customerDTO.setEmail(customer.getEmail());
         customerDTO.setNotes(customer.getNotes());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         List<String> giveaways = customerGiveawayRepository.findByCustomer(customer).stream()
-                .map(customerGiveaway -> String.format("%d x %s", customerGiveaway.getQuantity(), customerGiveaway.getGiveaway().getName()))
+                .map(customerGiveaway -> String.format("%s - %d x %s",
+                        customerGiveaway.getDate().format(formatter),
+                        customerGiveaway.getQuantity(),
+                        customerGiveaway.getGiveaway().getName()))
                 .toList();
         customerDTO.setGiveaways(String.join("\n", giveaways));
         return customerDTO;
