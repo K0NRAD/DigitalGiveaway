@@ -1,6 +1,5 @@
 package schwarz.it.digital_giveaway.service;
 
-import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import schwarz.it.digital_giveaway.domain.Customer;
@@ -11,6 +10,8 @@ import schwarz.it.digital_giveaway.repos.CustomerRepository;
 import schwarz.it.digital_giveaway.util.NotFoundException;
 import schwarz.it.digital_giveaway.util.WebUtils;
 
+import java.util.List;
+
 
 @Service
 public class CustomerService {
@@ -19,7 +20,7 @@ public class CustomerService {
     private final CustomerGiveawayRepository customerGiveawayRepository;
 
     public CustomerService(final CustomerRepository customerRepository,
-            final CustomerGiveawayRepository customerGiveawayRepository) {
+                           final CustomerGiveawayRepository customerGiveawayRepository) {
         this.customerRepository = customerRepository;
         this.customerGiveawayRepository = customerGiveawayRepository;
     }
@@ -58,6 +59,10 @@ public class CustomerService {
         customerDTO.setId(customer.getId());
         customerDTO.setEmail(customer.getEmail());
         customerDTO.setNotes(customer.getNotes());
+        List<String> giveaways = customerGiveawayRepository.findByCustomer(customer).stream()
+                .map(customerGiveaway -> String.format("%d x %s", customerGiveaway.getQuantity(), customerGiveaway.getGiveaway().getName()))
+                .toList();
+        customerDTO.setGiveaways(String.join("\n", giveaways));
         return customerDTO;
     }
 

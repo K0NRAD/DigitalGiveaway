@@ -20,6 +20,7 @@
                             <th th:text="#{customer.id.label}" scope="col" />
                             <th th:text="#{customer.email.label}" scope="col" />
                             <th th:text="#{customer.notes.label}" scope="col" />
+                            <th th:text="#{customer.giveaways.label}" scope="col" />
                             <th><!-- --></th>
                         </tr>
                     </thead>
@@ -28,6 +29,7 @@
                             <td th:text="${customer.id}" />
                             <td th:text="${customer.email}" />
                             <td th:text="${customer.notes}" />
+                            <td th:text="${customer.giveaways}" style="white-space: pre-line;" />
                             <td>
                                 <div class="float-end text-nowrap">
                                     <a th:href="@{/customers/edit/{id}(id=${customer.id})}" th:text="#{customer.list.edit}" class="btn btn-sm btn-info" />

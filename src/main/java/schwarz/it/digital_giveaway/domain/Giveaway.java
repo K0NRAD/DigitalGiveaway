@@ -40,15 +40,6 @@ public class Giveaway {
     @Column(length = 256)
     private String description;
 
-    @Column(length = 256)
-    private String note;
-
-    @Column(nullable = false, length = 32)
-    private String type;
-
-    @Column(length = 32)
-    private String size;
-
     @Column(nullable = false)
     private Integer quantity;
 

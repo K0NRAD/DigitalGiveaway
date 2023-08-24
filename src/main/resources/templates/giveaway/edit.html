@@ -16,9 +16,6 @@
             <form th:action="${T(schwarz.it.digital_giveaway.util.WebUtils).getRequest().requestURI}" method="post">
                 <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='name')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='description')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='note')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='type', columns='col-md-4')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='size', columns='col-md-4')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='quantity', type='number', columns='col-md-2')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='giveaway', field='vendor', type='select', columns='col-md-6')}" />
                 <input type="submit" th:value="#{giveaway.edit.headline}" class="btn btn-primary mt-4" />

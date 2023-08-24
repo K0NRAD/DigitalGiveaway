@@ -19,18 +19,10 @@ public class GiveawayDTO {
     @Size(max = 256)
     private String description;
 
-    @Size(max = 256)
-    private String note;
-
-    @NotNull
-    @Size(max = 32)
-    private String type;
-
-    @Size(max = 32)
-    private String size;
-
     @NotNull
     private Integer quantity;
+
+    private Integer available;
 
     private Long vendor;
 

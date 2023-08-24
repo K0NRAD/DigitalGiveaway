@@ -2,7 +2,6 @@ package schwarz.it.digital_giveaway.model;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,4 +18,6 @@ public class CustomerDTO {
 
     @Size(max = 256)
     private String notes;
+
+    private String giveaways;
 }

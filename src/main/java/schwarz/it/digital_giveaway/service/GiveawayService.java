@@ -1,6 +1,5 @@
 package schwarz.it.digital_giveaway.service;
 
-import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import schwarz.it.digital_giveaway.domain.CustomerGiveaway;
@@ -13,6 +12,8 @@ import schwarz.it.digital_giveaway.repos.VendorRepository;
 import schwarz.it.digital_giveaway.util.NotFoundException;
 import schwarz.it.digital_giveaway.util.WebUtils;
 
+import java.util.List;
+
 
 @Service
 public class GiveawayService {
@@ -22,8 +23,8 @@ public class GiveawayService {
     private final CustomerGiveawayRepository customerGiveawayRepository;
 
     public GiveawayService(final GiveawayRepository giveawayRepository,
-            final VendorRepository vendorRepository,
-            final CustomerGiveawayRepository customerGiveawayRepository) {
+                           final VendorRepository vendorRepository,
+                           final CustomerGiveawayRepository customerGiveawayRepository) {
         this.giveawayRepository = giveawayRepository;
         this.vendorRepository = vendorRepository;
         this.customerGiveawayRepository = customerGiveawayRepository;
@@ -63,10 +64,11 @@ public class GiveawayService {
         giveawayDTO.setId(giveaway.getId());
         giveawayDTO.setName(giveaway.getName());
         giveawayDTO.setDescription(giveaway.getDescription());
-        giveawayDTO.setNote(giveaway.getNote());
-        giveawayDTO.setType(giveaway.getType());
-        giveawayDTO.setSize(giveaway.getSize());
+        int usedGiveaways = customerGiveawayRepository.findByGiveaway(giveaway).stream()
+                .mapToInt(CustomerGiveaway::getQuantity)
+                .sum();
         giveawayDTO.setQuantity(giveaway.getQuantity());
+        giveawayDTO.setAvailable(giveaway.getQuantity() - usedGiveaways);
         giveawayDTO.setVendor(giveaway.getVendor() == null ? null : giveaway.getVendor().getId());
         return giveawayDTO;
     }
@@ -74,9 +76,6 @@ public class GiveawayService {
     private Giveaway mapToEntity(final GiveawayDTO giveawayDTO, final Giveaway giveaway) {
         giveaway.setName(giveawayDTO.getName());
         giveaway.setDescription(giveawayDTO.getDescription());
-        giveaway.setNote(giveawayDTO.getNote());
-        giveaway.setType(giveawayDTO.getType());
-        giveaway.setSize(giveawayDTO.getSize());
         giveaway.setQuantity(giveawayDTO.getQuantity());
         final Vendor vendor = giveawayDTO.getVendor() == null ? null : vendorRepository.findById(giveawayDTO.getVendor())
                 .orElseThrow(() -> new NotFoundException("vendor not found"));

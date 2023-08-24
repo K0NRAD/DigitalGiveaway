@@ -19,10 +19,8 @@
                         <tr>
                             <th th:text="#{giveaway.name.label}" scope="col" />
                             <th th:text="#{giveaway.description.label}" scope="col" />
-                            <th th:text="#{giveaway.note.label}" scope="col" />
-                            <th th:text="#{giveaway.type.label}" scope="col" />
-                            <th th:text="#{giveaway.size.label}" scope="col" />
                             <th th:text="#{giveaway.quantity.label}" scope="col" />
+                            <th th:text="#{giveaway.available.label}" scope="col" />
                             <th th:text="#{giveaway.vendor.label}" scope="col" />
                             <th><!-- --></th>
                         </tr>
@@ -31,10 +29,8 @@
                         <tr th:each="giveaway : ${giveaways}">
                             <td th:text="${giveaway.name}" />
                             <td th:text="${giveaway.description}" />
-                            <td th:text="${giveaway.note}" />
-                            <td th:text="${giveaway.type}" />
-                            <td th:text="${giveaway.size}" />
                             <td th:text="${giveaway.quantity}" />
+                            <td th:text="${giveaway.available}" />
                             <td th:text="${giveaway.vendor}" />
                             <td>
                                 <div class="float-end text-nowrap">
